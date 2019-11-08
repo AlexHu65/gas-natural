@@ -36,11 +36,6 @@
 <link rel="stylesheet" href="{DIR}assets/css/bootstrapValidator.min.css" type="text/css">
 <link rel="stylesheet" href="{DIR}assets/css/jquery.dataTables.min.css" type="text/css">
 <link rel="stylesheet" href="{DIR}assets/css/dataTables.bootstrap.min.css" type="text/css">
-<!--     Fonts and icons     -->
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-<!-- Material Kit CSS -->
-<link href="{DIR}assets/material-dark/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 <link rel="stylesheet" href="{DIR}assets/css/all.min.css" type="text/css">
 <link rel="stylesheet" href="{DIR}assets/css/admin.css" type="text/css">
 <link rel="stylesheet" href="{DIR}assets/css/main.css" type="text/css">
@@ -48,59 +43,26 @@
 <link rel="shortcut icon" href="{DIR}assets/img/{FAVICON}" type="image/ico">
 <script src="{DIR}assets/js/modernizr.min.js"></script>
 </head>
-<body class="dark-edition">
-  <div class="wrapper ">
-    {MENU}
-  <div class="main-panel">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon icon-bar"></span>
-          <span class="navbar-toggler-icon icon-bar"></span>
-          <span class="navbar-toggler-icon icon-bar"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end">
-          <ul class="navbar-nav">
-            <li class="nav-item">
+<body class="{BACKGROUND}">
+  <input type="hidden" value="{DIR}" id="hdn_baseurl">
+  {MENU}
 
-            </li>
-            <!-- your navbar here -->
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- End Navbar -->
-    <div class="content">
-      <div class="container-fluid">
-        <!-- your content here -->
-        {CONTENT}
-      </div>
-    </div>
-  </div>
-</div>
+  {BARRA_TOP}
 
-<!--   Core JS Files   -->
-<input type="hidden" value="{DIR}" id="hdn_baseurl">
-<script src="{DIR}assets/material-dark/js/core/jquery.min.js"></script>
-<script src="{DIR}assets/material-dark/js/core/popper.min.js"></script>
-<script src="{DIR}assets/material-dark/js/core/bootstrap-material-design.min.js"></script>
-<script src="https://unpkg.com/default-passive-events"></script>
-<script src="{DIR}assets/material-dark/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!-- Chartist JS -->
-<script src="{DIR}assets/material-dark/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="{DIR}assets/material-dark/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{DIR}assets/material-dark/js/material-dashboard.js?v=2.1.0"></script>
-<script src="{DIR}assets/assets/js/admin.js"></script>
-<script src="{DIR}assets/assets/js/main.js"></script>
+  {CONTENT}
 
-{ALERT}
+  <script src="{DIR}assets/js/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+  <script src="{DIR}assets/js/bootstrap.min.js"></script>
+  <script src="{DIR}assets/js/bootstrapValidator.min.js"></script>
+  <script src="{DIR}assets/js/jquery.dataTables.min.js"></script>
+  <script src="{DIR}assets/js/dataTables.bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script src="{DIR}assets/js/all.min.js"></script>
+  <script src="{DIR}assets/js/admin.js"></script>
+  <script src="{DIR}assets/js/main.js"></script>
+
+  {ALERT}
 </body>
 </html>

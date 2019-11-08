@@ -1,5 +1,6 @@
 <?php
 class Adm_registros_model extends CI_Model{
+
   public function __construct(){
     parent::__construct();
   }
@@ -86,101 +87,101 @@ class Adm_registros_model extends CI_Model{
     return $bloqHTML;
   }
 
-// Metodo para borrar de una tabla , reutilizable
-public function deleteInfo($id, $table){
-
-  $query =  "DELETE FROM $table WHERE id = $id";
-  if($this->db->query($query)){
-    return array("band" => 1 , "msg" => "Elemento eliminado con éxito" );
-  }else{
-    return array("band" => 0 , "msg" => "No se pudo eliminar elemento");
-  }
-}
-
-// Actualizar el contacto
-public function updateInfo($data){
-  if($this->db->update('lq_contacto', $data)){
-    return array("band" => 1, "msg" => "Se actualizo correctamente la información");
-  }else{
-    return array("band" => 0, "msg" => "No se pudo actualizar");
-  }
-}
-
-// Actualizar el banner
-public function updateBanner($data){
-  if($this->db->update('lq_banner_home', $data)){
-    return array("band" => 1, "msg" => "Se actualizo correctamente la información");
-  }else{
-    return array("band" => 0, "msg" => "No se pudo actualizar");
-  }
-}
-
-// Actualizar solo un post
-public function updatePost($data, $id){
-  $this->db->where("id" , $id);
-  if($this->db->update('lq_entradas', $data)){
-    return array("band" => 1, "msg" => "Se actualizo correctamente la información");
-  }else{
-    return array("band" => 0, "msg" => "No se pudo actualizar");
-  }
-}
-
-// Añadir una entrada
-public function addInfo($data){
-  if($this->db->insert('lq_entradas', $data)){
-    return array("band" => 1, "msg" => "Se agrego correctamente la entrada");
-  }else{
-    return array("band" => 0, "msg" => "No se pudo agregar la entrada");
-  }
-}
-
-// Obtener el banner actual
-public function getHomeBanner(){
-
-  $query = "SELECT * FROM lq_banner_home";
-  $arrayBanner = array();
-  $resultset =  $this->db->query($query);
-
-  if($resultset->num_rows() > 0 ){
-    foreach ($resultset->result() as $banner) {
-      $arrayBanner[] = array(
-        "id" => $banner->id ,
-        "source" => $banner->source);
-      }
-    }
-    return $arrayBanner;
-  }
-
-  // Agregamos categorias
-  public function addCategorias($data){
-    if($this->db->insert('lq_categorias', $data)){
-      return array("band" => 1, "msg" => "Se agrego correctamente la categoría");
+  // Metodo para borrar de una tabla , reutilizable
+  public function deleteInfo($id, $table){
+    $query =  "DELETE FROM $table WHERE id = $id";
+    if($this->db->query($query)){
+      return array("band" => 1 , "msg" => "Elemento eliminado con éxito" );
     }else{
-      return array("band" => 0, "msg" => "No se pudo agregar la categoría");
+      return array("band" => 0 , "msg" => "No se pudo eliminar elemento");
     }
   }
 
-  // Obtenemos la información del contacto
-  public function getContactInfo()
-  {
-    $query = "SELECT * FROM lq_contacto";
-    $arrayContacto = array();
+  // Actualizar el contacto
+  public function updateInfo($data){
+    if($this->db->update('lq_contacto', $data)){
+      return array("band" => 1, "msg" => "Se actualizo correctamente la información");
+    }else{
+      return array("band" => 0, "msg" => "No se pudo actualizar");
+    }
+  }
+
+  // Actualizar el banner
+  public function updateBanner($data){
+    if($this->db->update('lq_banner_home', $data)){
+      return array("band" => 1, "msg" => "Se actualizo correctamente la información");
+    }else{
+      return array("band" => 0, "msg" => "No se pudo actualizar");
+    }
+  }
+
+  // Actualizar solo un post
+  public function updatePost($data, $id){
+    $this->db->where("id" , $id);
+    if($this->db->update('lq_entradas', $data)){
+      return array("band" => 1, "msg" => "Se actualizo correctamente la información");
+    }else{
+      return array("band" => 0, "msg" => "No se pudo actualizar");
+    }
+  }
+
+  // Añadir una entrada
+  public function addInfo($data, $table){
+    if($this->db->insert($table, $data)){
+      return array("band" => 1, "msg" => "Información agregada correctamente");
+    }else{
+      return array("band" => 0, "msg" => "No se pudo agregar la información");
+    }
+  }
+
+  // Obtener el banner actual
+  public function getHomeBanner(){
+
+    $query = "SELECT * FROM lq_banner_home";
+    $arrayBanner = array();
     $resultset =  $this->db->query($query);
 
     if($resultset->num_rows() > 0 ){
-      foreach ($resultset->result() as $post) {
+      foreach ($resultset->result() as $banner) {
+        $arrayBanner[] = array(
+          "id" => $banner->id ,
+          "source" => $banner->source);
+        }
+      }
+      return $arrayBanner;
+    }
 
-        $arrayContacto[] = array('id' => $post->id ,
-        "telefono" => $post->telefono,
-        "email" => $post->email,
-        "direccion" => $post->direccion,
-        "estado" => $post->estado,
-        "facebook" => $post->facebook,
-        "linkedin" => $post->linkedin,
-        "instagram" => $post->instagram,
-        "ciudad" => $post->ciudad);
+    // Agregamos categorias
+    public function addCategorias($data){
+      if($this->db->insert('lq_categorias', $data)){
+        return array("band" => 1, "msg" => "Se agrego correctamente la categoría");
+      }else{
+        return array("band" => 0, "msg" => "No se pudo agregar la categoría");
       }
     }
-    return $arrayContacto;
+
+    // Obtenemos la información del contacto
+    public function getContactInfo()
+    {
+      $query = "SELECT * FROM lq_contacto";
+      $arrayContacto = array();
+      $resultset =  $this->db->query($query);
+
+      if($resultset->num_rows() > 0 ){
+        foreach ($resultset->result() as $post) {
+
+          $arrayContacto[] = array('id' => $post->id ,
+          "telefono" => $post->telefono,
+          "email" => $post->email,
+          "direccion" => $post->direccion,
+          "estado" => $post->estado,
+          "facebook" => $post->facebook,
+          "linkedin" => $post->linkedin,
+          "instagram" => $post->instagram,
+          "ciudad" => $post->ciudad);
+        }
+      }
+      return $arrayContacto;
+    }
+
   }
-}

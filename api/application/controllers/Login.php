@@ -30,7 +30,7 @@ class Login extends CI_Controller {
 		{
 			show_404();
 		} else {
-			$query = $this->db->where('user',$this->input->post('email'))->where('pass',$this->input->post('password'))->get('lq_users');
+			$query = $this->db->where('user',$this->input->post('email'))->where('pass',$this->input->post('password'))->get('users');
 			if ($query->num_rows() > 0){
 				$row = $query->row();
 				$session = array(

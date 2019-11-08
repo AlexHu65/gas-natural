@@ -12,7 +12,6 @@ class Admin extends CI_Controller {
 
   public function index()
   {
-
     // Obtenemos los datos requeridos para el admin
     $categorias = $this->init_model->getCategorias();
     $contacto  = $this->adm_registros_model->getContactInfo();
@@ -34,7 +33,6 @@ class Admin extends CI_Controller {
   }
 
   public function listado(){
-
 
     $data['POST'] = $this->init_model->getPosts();
     $data['DIR'] = base_url();
@@ -131,10 +129,35 @@ class Admin extends CI_Controller {
       }
       // Retornamos el json del modelo
       echo json_encode($resultset);
-
     }
   }
 
+  public function addRecurso(){
+
+    if (isset($_FILES)) {
+
+      $file =  $this->updloadFile($_FILES, FALSE, "", TRUE);
+      // si se pudo subir el archivo
+      if($file['band'] == 1){
+
+        $data = array(
+          "titulo" => $this->input->post("titulo") ,
+          "descripcion" => $this->input->post("descripcion"),
+          "source" => $file['file'],
+          "tipo" => $file['tipo'],
+          "fecha" => date('Y-m-d')
+        );
+
+        // Retornamos la respuesta del modelo
+        $table = 'lq_recursos';
+        $resultset =  $this->adm_registros_model->addInfo($data,$table);
+        echo json_encode($resultset);
+
+      }else {
+        return json_encode($file);
+      }
+    }
+  }
 
   // Funcion para agregar entradas de post
   public function addAjax(){
@@ -171,11 +194,11 @@ class Admin extends CI_Controller {
       );
 
       // Retornamos la respuesta del modelo
-      $resultset =  $this->adm_registros_model->addInfo($data);
+      $table = "lq_entradas";
+      $resultset =  $this->adm_registros_model->addInfo($data, $table);
       echo json_encode($resultset);
     }
   }
-
 
   // Agregamos categorias con ajax
   public function addAjaxCategoria(){
@@ -217,7 +240,6 @@ class Admin extends CI_Controller {
       }else{
         $fileToDb = $file;
       }
-
       // Data del post a actualizar
       $data = array(
         "titulo" => $this->input->post("titulo") ,
@@ -363,12 +385,61 @@ class Admin extends CI_Controller {
   }
 
   // Funcion para subir imagenes
-  public function updloadFile($file, $update =  FALSE, $post = ""){
+  public function updloadFile($file, $update =  FALSE, $post = "", $pdf = FALSE, $video = FALSE){
 
     /* Getting file name */
     $random = mt_rand(100, 999);
 
     $directory =  "./media/img/posts/";
+
+    define('KB', 1024);
+    define('MB', 1048576);
+    define('GB', 1073741824);
+    define('TB', 1099511627776);
+
+    if($pdf || $video){
+      // validamos el tamaño
+      if($file['recurso']['size'] > 20*MB){
+        return array("band" => 0, "msg" => "Archivo con peso no permito");
+      }
+
+      if($file['recurso']['type'] == "application/pdf"){
+
+        $tipo =  "pdf";
+        // nombre para la base de datos
+        $name = strtolower(str_replace(" ", "_", $file['recurso']['name']));
+        // nombre que se sue a la bbdd
+        $directory =  "./media/recurso/" . strtolower(str_replace(" ", "_", $file['recurso']['name']));
+        // subimos archivo
+        if(move_uploaded_file($file['recurso']['tmp_name'], $directory)){
+          return array("band" => 1, "msg" => "Archivo subido con éxito", "file" => $name, "tipo" => $tipo);
+        }else {
+          return array("band" => 0, "msg" => "No se pudo subir el archivo");
+        }
+
+      }else if($file['recurso']['type'] == "video/mp4"){
+
+        // validamos el tamaño
+        if($file['recurso']['size'] > 20*MB){
+          return array("band" => 0, "msg" => "Archivo con peso no permito");
+        }
+
+        $tipo =  "mp4";
+        // nombre para la base de datos
+        $name = strtolower(str_replace(" ", "_", $file['recurso']['name']));
+        // nombre que se sue a la bbdd
+        $directory =  "./media/recurso/" . strtolower(str_replace(" ", "_", $file['recurso']['name']));
+        // subimos archivo
+        if(move_uploaded_file($file['recurso']['tmp_name'], $directory)){
+          return array("band" => 1, "msg" => "Archivo subido con éxito", "file" => $name, "tipo" => $tipo);
+        }else {
+          return array("band" => 0, "msg" => "No se pudo subir el archivo");
+        }
+      }else{
+        return array("band" => 0, "msg" => "No se pudo subir el archivo");
+      }
+    }
+
 
     if(!file_exists($directory)){
       mkdir($directory, 0755);
@@ -378,14 +449,14 @@ class Admin extends CI_Controller {
     $imageFileType = $file["img"]["type"];
 
     // Validamos la extension del archivo
-    $valid_extensions = array("image/jpg", "image/jpeg", "image/png");
+    $valid_extensions = array("image/jpg", "image/jpeg", "image/png,");
 
     // Validamos si es una extension aceptada
     if (!in_array(strtolower($imageFileType), $valid_extensions)) {
       $uploadOk = 0;
     }
     if ($uploadOk == 0) {
-      return array('band' => 0 ,'msg' => 'No se pudo subir la imagen , verifica el tipo de archivo');
+      return array('band' => 0 ,'msg' => 'No se puede subir la imagen , verifica el tipo de archivo');
     } else {
 
       // Obtenemos el tamaño de la imagen
@@ -399,7 +470,6 @@ class Admin extends CI_Controller {
       $fileNewName = $random;
 
       switch ($imgType) {
-
         // IMAGENES PNG
 
         case IMAGETYPE_PNG:
@@ -459,7 +529,6 @@ class Admin extends CI_Controller {
       show_404();
 
     } else {
-
       // Recibimos la data del formulario
 
       $data = array(
@@ -498,4 +567,6 @@ class Admin extends CI_Controller {
 
     return $targetLayer;
   }
+
+
 }
