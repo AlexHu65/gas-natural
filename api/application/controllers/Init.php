@@ -23,7 +23,7 @@ class Init extends CI_Controller {
 		// validamos que sea un peticion ajax
 		if(!$this->input->is_ajax_request()){
 			return show_404();
-		}else{
+		}else{			
 
 			$data = array(
 				'nombre' => $this->input->post('nombre'),
@@ -41,13 +41,17 @@ class Init extends CI_Controller {
 
 	}
 
-	public function validEmail(){
+	public function validEmail($email = ""){
 		if(!$this->input->is_ajax_request()){
 			return show_404();
 		}else{
 
 			$item = 'email';
-			$value = $this->input->post('email');
+			if($email != ""){
+				$value = $email;
+			}else{
+				$value = $this->input->post('email');
+			}
 			$table = 'suscripcion';
 			echo json_encode($this->init_model->getEmail($table, $item, $value));
 		}
@@ -67,7 +71,7 @@ class Init extends CI_Controller {
 				echo "<option value='".$value."'>". utf8_decode($value) . "</option>";
 			}
 		}
-		
+
 		// get municipios
 		public function procesarMunicipio(){
 			// Capture selected country

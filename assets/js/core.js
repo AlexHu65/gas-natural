@@ -2,6 +2,7 @@ var heightBrowser = $(window).height();
 var widthBrowser = $(window).width();
 var dir = $("#hdn_baseurl").val();
 var actual = window.location.href;
+var validEmail = true;
 
 $(window).on('scroll', function(){
   if ( $(window).scrollTop() > 0 ){
@@ -21,9 +22,12 @@ $("#emailInput").on('input',function(){
       console.log(response.msg);
       $(".email-span").html(response.msg);
       $(".submit").attr('disabled', true);
+      validEmail = false;
     }else{
       $(".email-span").html('');
       $(".submit").attr('disabled', false);
+      validEmail = true;
+
     }
   } , 'json');
 });
@@ -86,21 +90,30 @@ var formularios = (function () {
 
   var FormSuscripcion = function () {
     bootstrapValidator(suscripcion.formulario, suscripcion.campos, function(){
-      $(this).submit(function () {
-        $('.send').hide();
-        $('.loading').removeClass('dn');
-        var datos = $( this ).serialize();
-        $.post('api/init/add', datos, function(response){
-          console.log(response);
-          $('.loading').addClass('dn');
-          Swal.fire(
-            response.title,
-            response.msg,
-            response.type
-          )
+      $(this).submit(function (e) {
+        e.preventDefault();
+        if(validEmail){
+          $('.send').hide();
+          $('.loading').removeClass('dn');
+          var datos = $( this ).serialize();
+          $.post('api/init/add', datos, function(response){
+            console.log(response);
+            $('.loading').addClass('dn');
+            Swal.fire(
+              response.title,
+              response.msg,
+              response.type
+            );
 
-        }, 'json');
-        return false;
+          }, 'json');
+          return false;
+        }else{
+          Swal.fire(
+            "Email no valido",
+            "Introduce otro email",
+            "error"
+          );
+        }
       });
     });
   };
