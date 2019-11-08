@@ -60,4 +60,5 @@ $route['registro/(:num)/delete'] = "init/delete/$1";
 $route['webadmin/login'] = "login/adm_login";
 $route['webadmin/logout'] = "login/logout";
 $route['webadmin'] = "admin";
-$route['webadmin/posts'] = "admin/listado";
+$route['webadmin/listado'] = "admin/listado";
+$route['webadmin/reporte'] = "admin/export_excel_completo";

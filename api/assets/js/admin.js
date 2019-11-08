@@ -396,7 +396,7 @@ function readURL3(input) {
     var login = {
       formulario: $('#frm-login'),
       campos: {
-        email: {validators: {notEmpty: {message: "Este campo es requerido"},emailAddress: {message: 'Correo no valido'}}},
+        email: {validators: {notEmpty: {message: "Este campo es requerido"},emailAddress: {message: 'Correo no válido'}}},
         password: {validators: {notEmpty: {message: "Este campo es requerido"}}}
       }
     };

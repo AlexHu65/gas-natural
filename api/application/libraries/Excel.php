@@ -1,10 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
 class Excel
 {
-
-  public function excelAllEmpleados($arreglo, $tipoReporte)
+  public function excelAll($arreglo, $tipoReporte)
   {
     // CREACION DEL EXCEL
     // Variables de apoyo
@@ -41,13 +39,6 @@ class Excel
       $schema_insert .= "\t";
       print(trim($schema_insert));
       print "\n";
-
     }
-
   }
-
-  public function excelEvaluciones($arreglo){
-
-  }
-
 }

@@ -30,12 +30,12 @@ class Login extends CI_Controller {
 		{
 			show_404();
 		} else {
-			$query = $this->db->where('user',$this->input->post('email'))->where('pass',$this->input->post('password'))->get('users');
+			$query = $this->db->where('email',$this->input->post('email'))->where('pass',$this->input->post('password'))->get('users');
 			if ($query->num_rows() > 0){
 				$row = $query->row();
 				$session = array(
 					'ID'          => $row->id,
-					'admin' => $row->user,
+					'admin' => $row->email,
 					'tipo' => $row->tipo,
 				);
 				$this->session->set_userdata($session);
@@ -49,6 +49,6 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata('ID');
 		$this->session->unset_userdata('user');
 		$this->session->sess_destroy();
-		redirect('/');
+		redirect('/webadmin');
 	}
 }
