@@ -28,6 +28,8 @@ a:hover{color: inherit;}
 .btn-anchor{text-decoration: none !important;    background: #dd772e;    padding: 8px;    color: white;    border-radius: 5px; text-transform: uppercase;  font-weight: bold;    width: 73%;    padding-left: 25px; padding-right: 25px;}
 .btn-anchor i{color: #184176;}
 .btn-anchor svg{color: #184176;}
+.header_banner{position: relative;left: 56%;}
+.mobile-navbar{display: none; background: #184176;}
 
 .mapa_ng{width: 100%;}
 .mapa_ng img{width: 100%;}
@@ -53,7 +55,7 @@ footer .item a{color: #939eb8;}
   .footer_menu{display: inline-grid;}
   .sub_menu_button{padding: 15px;}
   .custom-select-md{margin-top: 15px;}
-  
+
 
 }
 
@@ -65,6 +67,8 @@ footer .item a{color: #939eb8;}
   .footer_menu{display: inline-grid;}
   .sub_menu_button{padding: 15px;}
   .custom-select-md{margin-top: 15px;}
+  
+
 
 
 }
@@ -77,6 +81,7 @@ footer .item a{color: #939eb8;}
   .footer_menu{display: inline-grid;}
   .sub_menu_button{padding: 15px;}
   .custom-select-md{margin-top: 15px;}
+  .mobile-navbar{display: block;}
 
 
 }
@@ -89,5 +94,6 @@ footer .item a{color: #939eb8;}
   .footer_menu{display: inline-grid;}
   .sub_menu_button{padding: 15px;}
   .custom-select-md{margin-top: 15px;}
+  .mobile-navbar{display: block;}
 
 }
