@@ -1,7 +1,7 @@
 a{text-decoration: none;}
 a:hover{color: inherit;}
 .dn{display: none;}
-.bloq_1{background: url('../img/ng_banner.png');background-size: cover;background-repeat: no-repeat;background-position: center;color:white;height: 100vh;min-height: 100vh;}
+.bloq_1{background-attachment: fixed !important;background: url('../img/ng_banner.png');background-size: cover;background-repeat: no-repeat;background-position: center;color:white;height: 100vh;min-height: 100vh;}
 .banner_ng{width: 45%;}
 .banner_ng img{width: 100%;}
 .logo_ng , .tag_ng{height: 50vh; min-height: 50vh;width: 105%;}
@@ -67,7 +67,7 @@ footer .item a{color: #939eb8;}
   .footer_menu{display: inline-grid;}
   .sub_menu_button{padding: 15px;}
   .custom-select-md{margin-top: 15px;}
-  
+
 
 
 
